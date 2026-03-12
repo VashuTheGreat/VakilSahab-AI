@@ -11,3 +11,9 @@ class DATA_INGESTION_CONFIG:
     download_Data_config_path:str=DOWNLOAD_DATA_CONFIG_PATH
     downloaded_Data_folder:str=DOWNLOADED_DATA_FOLDER
     
+
+
+@dataclass
+class RAG_IngestionConfig:
+    db_path:str
+    docs_path:str    
