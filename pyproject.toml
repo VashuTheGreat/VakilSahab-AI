@@ -1,0 +1,14 @@
+[project]
+name = "vakilsahab-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12, <3.13"
+dependencies = [
+    "dill>=0.4.1",
+    "dotenv>=0.9.9",
+    "numpy>=2.4.3",
+    "opendatasets>=0.1.22",
+    "pandas>=3.0.1",
+    "pyyaml>=6.0.3",
+]
