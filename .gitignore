@@ -210,3 +210,9 @@ __marimo__/
 
 
 *.json
+
+
+
+
+src/MCP_Client/*
+db/*
