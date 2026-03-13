@@ -1,6 +1,8 @@
-def main():
-    print("Hello from vakilsahab-ai!")
 
-
+from dotenv import load_dotenv
+load_dotenv()
+from api.mcp_server import app
+from logger import *
 if __name__ == "__main__":
-    main()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
