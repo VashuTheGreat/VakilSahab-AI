@@ -1,26 +1,11 @@
 import fastapi
-from api.utils.main_utils import _pipelines
+from api.VakilSahab_feature.services.search_service import legal_search_logic
 import logging
 router=fastapi.APIRouter()
 
-
-
-@router.post("/legal_web_search")
+@router.get("/legal_web_search", operation_id="legal_web_search")
 async def legal_web_search(query: str, max_results: int = 5):
     """
     Search the web for legal information.
-    
-    Args:
-        query (str): The search query.
-        max_results (int): The maximum number of results to return.
-    
-    Returns:
-        str: The search results.
     """
-    try:
-        logging.info(f"MCP Tool: legal_web_search called with query: {query}")
-        pipeline = _pipelines['search']
-        results = await pipeline.run(query, max_results)
-        return str(results)
-    except Exception as e:
-        return f"Error during web search: {str(e)}"
+    return await legal_search_logic(query, max_results)
