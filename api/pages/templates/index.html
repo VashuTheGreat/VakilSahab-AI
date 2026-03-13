@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VakilSahab-AI | Next-Gen AI Legal Assistant</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <h1 class="logo-text">VakilSahab<span>.AI</span></h1>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" id="nav-chat" data-target="chat-view">
+                    <i class="fa-solid fa-message"></i> Legal Consultation
+                </a>
+                <a href="#" class="nav-item" id="nav-search" data-target="search-view">
+                    <i class="fa-solid fa-magnifying-glass"></i> Legal Web Search
+                </a>
+                <a href="#" class="nav-item" id="nav-agent" data-target="agent-view">
+                    <i class="fa-solid fa-robot"></i> MCP Agent
+                </a>
+                <a href="#" class="nav-item" id="nav-predict" data-target="predict-view">
+                    <i class="fa-solid fa-chart-line"></i> Case Predictor
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-toggle" id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Dark Mode</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Chat View (Ask Vakil Sahab) -->
+            <section id="chat-view" class="view-section active">
+                <header class="content-header">
+                    <h2><i class="fa-solid fa-gavel"></i> Ask Vakil Sahab</h2>
+                    <p>Your AI Legal Assistant for Indian Law</p>
+                </header>
+
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message system-message">
+                            <div class="avatar"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <div class="bubble">
+                                Hello! I am VakilSahab AI. How can I assist you with Indian law today?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <form id="chat-form">
+                        <input type="text" id="chat-input" placeholder="Type your legal query here..." autocomplete="off">
+                        <button type="submit" class="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Search View (Legal Web Search) -->
+            <section id="search-view" class="view-section" style="display: none;">
+                <header class="content-header">
+                    <h2><i class="fa-solid fa-magnifying-glass"></i> Legal Web Search</h2>
+                    <p>Search the web for up-to-date legal information.</p>
+                </header>
+
+                <div class="search-bar-container">
+                    <form id="search-form" class="search-form">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Enter topic to search..." autocomplete="off">
+                        <button type="submit" class="search-btn">Search</button>
+                    </form>
+                </div>
+
+                <div class="search-results" id="search-results">
+                    <!-- Results will be populated here -->
+                    <div class="empty-state">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <p>Perform a search to see the results here.</p>
+                    </div>
+                </div>
+                <!-- Loading State for Search -->
+                <div id="search-loader" class="loader" style="display: none;">
+                    <div class="spinner"></div>Searching...
+                </div>
+            </section>
+
+            <!-- Agent View (MCP Agent) -->
+            <section id="agent-view" class="view-section" style="display: none;">
+                <header class="content-header">
+                    <h2><i class="fa-solid fa-robot"></i> Advanced MCP Agent</h2>
+                    <p>Interact with our intelligent MCP pipeline.</p>
+                </header>
+                
+                <div class="chat-container">
+                    <div class="chat-messages" id="agent-messages">
+                        <div class="message system-message">
+                            <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                            <div class="bubble">
+                                MCP Agent Pipeline ready. Enter your prompt below.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <form id="agent-form">
+                        <input type="text" id="agent-input" placeholder="Send prompt to MCP Agent..." autocomplete="off">
+                        <button type="submit" class="send-btn"><i class="fa-solid fa-bolt"></i></button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Predictor View (Legal Case Predictor) -->
+            <section id="predict-view" class="view-section" style="display: none;">
+                <header class="content-header">
+                    <h2><i class="fa-solid fa-chart-line"></i> Case Win Predictor</h2>
+                    <p>M.L. model to calculate case strength based on features.</p>
+                </header>
+
+                <div class="predictor-container">
+                    <form id="predict-form" class="predict-form">
+                        <div class="form-group">
+                            <label for="case_type">Case Type (Encoded ID)</label>
+                            <input type="number" id="case_type" required placeholder="e.g. 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="lawyer_exp">Lawyer Experience (Years)</label>
+                            <input type="number" step="0.1" id="lawyer_exp" required placeholder="e.g. 10.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="judge_exp">Judge Experience (Years)</label>
+                            <input type="number" step="0.1" id="judge_exp" required placeholder="e.g. 15.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="judge_count">Number of Judges</label>
+                            <input type="number" id="judge_count" required placeholder="e.g. 3">
+                        </div>
+                        <button type="submit" class="primary-btn"><i class="fa-solid fa-calculator"></i> Calculate Probability</button>
+                    </form>
+
+                    <div id="predict-result" class="predict-result-card" style="display: none;">
+                        <div class="result-header">Prediction Complete</div>
+                        <div class="result-body">
+                            <div class="prob-circle">
+                                <span id="prob-value">0%</span>
+                                <small>Win Prob</small>
+                            </div>
+                            <div class="strength-indicator">
+                                <h3>Case Strength</h3>
+                                <div id="strength-value" class="badge">Unknown</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.0.3/marked.min.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

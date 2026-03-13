@@ -17,7 +17,17 @@ async def tool_call(state: State):
     if hasattr(last_message, 'tool_calls'):
         for t_call in last_message.tool_calls:
             tool = tools_by_name[t_call['name']]
-            observation = await tool.ainvoke(t_call['args'])
+            args = t_call['args']
+            
+            # Coerce simple string digits to ints to fix validation errors
+            coerced_args = {}
+            for k, v in args.items():
+                if isinstance(v, str) and v.isdigit():
+                    coerced_args[k] = int(v)
+                else:
+                    coerced_args[k] = v
+                    
+            observation = await tool.ainvoke(coerced_args)
             results.append(ToolMessage(content=str(observation), tool_call_id=t_call['id']))
             
     return {"messages": results}
