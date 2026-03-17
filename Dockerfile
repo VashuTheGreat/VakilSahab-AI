@@ -2,20 +2,16 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Force CPU Torch
+# Copy dependency files first (better caching)
+COPY requirements.txt pyproject.toml ./
 
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY requirements.txt .
-COPY pyproject.toml .
-# Install uv
-RUN pip install --no-cache-dir uv
-
-# Install dependencies into system python (no venv needed)
-RUN uv pip install --system .
-
-
-# Copy project
+# Copy rest of the application
 COPY . .
 
+EXPOSE 8000
 
-CMD ["uv", "run", "main.py"]
+# Run FastAPI app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
